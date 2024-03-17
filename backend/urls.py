@@ -33,8 +33,8 @@ def send_email(request):
     msg = EmailMultiAlternatives(
         'Email de teste',
         'Este é um email de confirmação teste',
-        'dls185568@gmail.com',
-        ['derekoob@hotmail.com']
+       #email do projeto 'dls185568@gmail.com',
+       #email pessoal ['@hotmail.com']
     )
 
     msg.send()
