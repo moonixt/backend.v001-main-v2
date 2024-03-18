@@ -85,6 +85,7 @@ class Produto(models.Model):
     valor = models.DecimalField(max_digits=6, decimal_places=2)
     qtd_estoque = models.IntegerField()
     descricao = models.TextField(null=False, blank=False)
+    categoria = models.CharField(max_length=50, null=False, blank=False)
 
     def __str__(self):
         return self.nome_produto
