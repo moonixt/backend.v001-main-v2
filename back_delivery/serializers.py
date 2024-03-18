@@ -6,10 +6,13 @@ from .models import Produto
 
 
 class UsuarioSerializer(serializers.ModelSerializer):
+
    
     class Meta:
         model = Usuario
         fields = ('id','nome','cpf','celular','email',)
+        
+         
         
 class ProdutoSerializer(serializers.ModelSerializer):
    

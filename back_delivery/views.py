@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework import status, viewsets
 from rest_framework.decorators import APIView
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, BasePermission, SAFE_METHODS
 from rest_framework.response import Response
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
@@ -26,11 +26,20 @@ class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
 
 
+class IsAuthenticatedOrPostOnly(BasePermission):
+    def has_permission(self, request, view):
+        if request.method in SAFE_METHODS:
+            return request.user and request.user.is_authenticated
+        # Permitir POST requests mesmo se o usuário não estiver autenticado
+        elif request.method == 'POST':
+            return True
+        return False
+
+
 class UsuarioViewSet(viewsets.ModelViewSet):
     queryset = Usuario.objects.all()
     serializer_class = UsuarioSerializer
-    #permission_classes = (IsAuthenticated,)
-
+   # permission_classes = [IsAuthenticatedOrPostOnly,]
 
 class ProdutoViewSet(viewsets.ModelViewSet):
     queryset = Produto.objects.all()
