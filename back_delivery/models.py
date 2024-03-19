@@ -81,6 +81,7 @@ class Pedido(models.Model):
 
 
 class Produto(models.Model):
+    image = models.ImageField(upload_to='upload/images', null=False, blank=False)
     nome_produto = models.CharField(max_length=50, null=False, blank=False)
     valor = models.DecimalField(max_digits=6, decimal_places=2)
     qtd_estoque = models.IntegerField()

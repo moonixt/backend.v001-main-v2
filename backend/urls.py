@@ -24,6 +24,8 @@ from rest_framework import routers
 from rest_framework_simplejwt.views import (TokenObtainPairView,
                                             TokenRefreshView)
 from back_delivery.views import LoginWithPhoneOTP, ValidateOTP
+from django.conf import settings
+from django.conf.urls.static import static
 
 
 
@@ -63,10 +65,8 @@ urlpatterns = [
     path('testmail/', send_email),
     path('otp/', LoginWithPhoneOTP.as_view(), name='login-with-otp'),
     path('validate-otp/', ValidateOTP.as_view(), name='validate-otp'),
+    
 
-
-
-
-]
+]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
     
