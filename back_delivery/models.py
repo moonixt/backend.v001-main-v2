@@ -81,12 +81,12 @@ class Pedido(models.Model):
 
 
 class Produto(models.Model):
-    image = models.ImageField(upload_to='upload/images', null=False, blank=False)
-    nome_produto = models.CharField(max_length=50, null=False, blank=False)
-    valor = models.DecimalField(max_digits=6, decimal_places=2)
-    qtd_estoque = models.IntegerField()
-    descricao = models.TextField(null=False, blank=False)
-    categoria = models.CharField(max_length=50, null=False, blank=False)
+    image = models.ImageField(upload_to='upload/images', null=False, blank=True)
+    nome_produto = models.CharField(max_length=50, null=False, blank=True)
+    valor = models.DecimalField(max_digits=6, decimal_places=2, blank=True)
+    qtd_estoque = models.IntegerField(blank=True)
+    descricao = models.TextField(null=False, blank=True)
+    categoria = models.CharField(max_length=50, null=False, blank=True)
 
     def __str__(self):
         return self.nome_produto
