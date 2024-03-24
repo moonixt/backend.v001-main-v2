@@ -90,6 +90,13 @@ class Produto(models.Model):
 
     def __str__(self):
         return self.nome_produto
+    
+
+class Restaurante(models.Model):
+    nome_restaurante = models.CharField(max_length=50, null=False, blank=True)
+    produtos_restaurante = models.ForeignKey(Produto, on_delete=models.CASCADE)
+
+
 
 
 class Item_pedido(models.Model):
