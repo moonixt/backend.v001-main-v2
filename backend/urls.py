@@ -15,7 +15,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from back_delivery.models import Endereco
-from back_delivery.views import MyTokenObtainPairView, UsuarioViewSet, ProdutoViewSet
+from back_delivery.views import MyTokenObtainPairView, UsuarioViewSet, ProdutoViewSet, RestauranteViewSet
 from django.contrib import admin
 from django.core.mail import EmailMultiAlternatives
 from django.http import HttpResponse
@@ -55,6 +55,7 @@ def send_email(request):
 router = routers.DefaultRouter()
 router.register(r'usuarios', UsuarioViewSet)
 router.register(r'produtos',ProdutoViewSet)
+router.register(r'restaurantes',RestauranteViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),

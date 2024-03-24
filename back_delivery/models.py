@@ -79,6 +79,26 @@ class Pedido(models.Model):
     def __str__(self):
         return str(self.id)
 
+class Restaurante(models.Model):
+    image = models.ImageField(upload_to='upload/images', null=False, blank=True)
+    nome_restaurante = models.CharField(max_length=50, null=False, blank=False)
+    logradouro_restaurante = models.CharField(max_length=50, null=False, blank=False)
+    numero_restaurante = models.SmallIntegerField(blank=False)
+    complemento_restaurante = models.CharField(max_length=50, blank=True, null=True)
+    ponto_ref_restaurante = models.CharField(max_length=50, null=True, blank=True)
+    bairro_restaurante = models.CharField(max_length=50, null=False, blank=False)
+    cidade_restaurante = models.CharField(max_length=50, null=False, blank=False)
+    uf_restaurante = models.CharField(max_length=2, null=False, blank=False)
+    cep_restaurante = models.CharField(max_length=7, null=False, blank=False)
+    descricao = models.TextField(null=True, blank=True)
+    
+    def __str__(self):
+        return self.nome_restaurante
+
+
+class Categoria(models.Model):
+    nome_categoria = models.CharField(max_length=50, null=True, blank=True)
+    restaurantes = models.ManyToManyField(Restaurante)
 
 class Produto(models.Model):
     image = models.ImageField(upload_to='upload/images', null=False, blank=True)
@@ -86,15 +106,17 @@ class Produto(models.Model):
     valor = models.DecimalField(max_digits=6, decimal_places=2, blank=True)
     qtd_estoque = models.IntegerField(blank=True)
     descricao = models.TextField(null=False, blank=True)
-    categoria = models.CharField(max_length=50, null=False, blank=True)
+    restaurante = models.ForeignKey(Restaurante, on_delete=models.CASCADE)
+    categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.nome_produto
     
 
-class Restaurante(models.Model):
-    nome_restaurante = models.CharField(max_length=50, null=False, blank=True)
-    produtos_restaurante = models.ForeignKey(Produto, on_delete=models.CASCADE)
+
+    
+    
+    
 
 
 
