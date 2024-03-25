@@ -40,7 +40,7 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
     celular = models.CharField(max_length=16, null=False, blank=False)
     email = models.CharField(max_length=50, null=False,
                              blank=False, unique=True)
-    otp = models.CharField(max_length=6, null=True, blank=True) 
+    otp = models.CharField(max_length=6, null=True, blank=True)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
 
@@ -79,46 +79,50 @@ class Pedido(models.Model):
     def __str__(self):
         return str(self.id)
 
+
+class Categoria(models.Model):
+    nome_categoria = models.CharField(max_length=50, null=True, blank=True)
+
+    def __str__(self):
+        return self.nome_categoria
+
+
 class Restaurante(models.Model):
-    image = models.ImageField(upload_to='upload/images', null=False, blank=True)
+    image = models.ImageField(
+        upload_to='upload/images', null=False, blank=True)
     nome_restaurante = models.CharField(max_length=50, null=False, blank=False)
-    logradouro_restaurante = models.CharField(max_length=50, null=False, blank=False)
+    logradouro_restaurante = models.CharField(
+        max_length=50, null=False, blank=False)
     numero_restaurante = models.SmallIntegerField(blank=False)
-    complemento_restaurante = models.CharField(max_length=50, blank=True, null=True)
-    ponto_ref_restaurante = models.CharField(max_length=50, null=True, blank=True)
-    bairro_restaurante = models.CharField(max_length=50, null=False, blank=False)
-    cidade_restaurante = models.CharField(max_length=50, null=False, blank=False)
+    complemento_restaurante = models.CharField(
+        max_length=50, blank=True, null=True)
+    ponto_ref_restaurante = models.CharField(
+        max_length=50, null=True, blank=True)
+    bairro_restaurante = models.CharField(
+        max_length=50, null=False, blank=False)
+    cidade_restaurante = models.CharField(
+        max_length=50, null=False, blank=False)
     uf_restaurante = models.CharField(max_length=2, null=False, blank=False)
     cep_restaurante = models.CharField(max_length=7, null=False, blank=False)
-    descricao = models.TextField(null=True, blank=True)
-    
+    descricao_restaurante = models.TextField(null=True, blank=True)
+    categoria_restaurante = models.ForeignKey(
+        Categoria, on_delete=models.CASCADE)
+
     def __str__(self):
         return self.nome_restaurante
 
 
-class Categoria(models.Model):
-    nome_categoria = models.CharField(max_length=50, null=True, blank=True)
-    restaurantes = models.ManyToManyField(Restaurante)
-
 class Produto(models.Model):
-    image = models.ImageField(upload_to='upload/images', null=False, blank=True)
+    image = models.ImageField(
+    upload_to='upload/images', null=False, blank=True)
     nome_produto = models.CharField(max_length=50, null=False, blank=True)
     valor = models.DecimalField(max_digits=6, decimal_places=2, blank=True)
     qtd_estoque = models.IntegerField(blank=True)
     descricao = models.TextField(null=False, blank=True)
     restaurante = models.ForeignKey(Restaurante, on_delete=models.CASCADE)
-    categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.nome_produto
-    
-
-
-    
-    
-    
-
-
 
 
 class Item_pedido(models.Model):
