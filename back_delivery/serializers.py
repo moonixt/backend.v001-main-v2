@@ -13,6 +13,8 @@ class UsuarioSerializer(serializers.ModelSerializer):
 
 class RestauranteSerializer(serializers.ModelSerializer):
 
+
+
     class Meta:
         model = Restaurante
         fields = ('id', 'image', 'nome_restaurante', 'logradouro_restaurante', 'numero_restaurante', 'complemento_restaurante', 'ponto_ref_restaurante',
@@ -21,7 +23,9 @@ class RestauranteSerializer(serializers.ModelSerializer):
 
 class ProdutoSerializer(serializers.ModelSerializer):
 
+    nome_restaurante = serializers.CharField(source='restaurante.nome_restaurante', read_only = True)
+
     class Meta:
         model = Produto
         fields = ('id', 'image', 'nome_produto', 'valor',
-                  'qtd_estoque', 'descricao', 'restaurante')
+                  'qtd_estoque', 'descricao', 'restaurante', 'nome_restaurante',)

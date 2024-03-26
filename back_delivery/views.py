@@ -10,6 +10,7 @@ from .auth import generate_otp, send_otp_phone
 from .models import Produto, Usuario, Restaurante
 from .serializers import ProdutoSerializer, UsuarioSerializer, RestauranteSerializer
 
+from rest_framework.decorators import api_view
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
@@ -96,3 +97,14 @@ class ValidateOTP(APIView):
             return Response(user_data, status=status.HTTP_200_OK)
         else:
             return Response({'error': 'Invalid OTP.'}, status=status.HTTP_400_BAD_REQUEST)
+
+
+
+@api_view(['GET'])
+def get_produtos_restaurantes(request, id_restaurante):
+    
+    produtos = Produto.objects.filter(restaurante = id_restaurante)
+
+    product_s = ProdutoSerializer(instance=produtos ,many=True)
+
+    return Response(product_s.data, status=status.HTTP_200_OK)

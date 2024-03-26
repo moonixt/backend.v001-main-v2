@@ -15,7 +15,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from back_delivery.models import Endereco
-from back_delivery.views import MyTokenObtainPairView, UsuarioViewSet, ProdutoViewSet, RestauranteViewSet
+from back_delivery.views import MyTokenObtainPairView, UsuarioViewSet, ProdutoViewSet, RestauranteViewSet, get_produtos_restaurantes
 from django.contrib import admin
 from django.core.mail import EmailMultiAlternatives
 from django.http import HttpResponse
@@ -67,6 +67,7 @@ urlpatterns = [
     path('otp/', LoginWithPhoneOTP.as_view(), name='login-with-otp'),
     path('validate-otp/', ValidateOTP.as_view(), name='validate-otp'),
     
+    path('restaurantes-produtos/<int:id_restaurante>/', get_produtos_restaurantes, name='restaurantes-produtos'),
 
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
