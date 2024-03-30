@@ -61,7 +61,6 @@ class Endereco(models.Model):
     bairro = models.CharField(max_length=50, null=False, blank=False)
     cidade = models.CharField(max_length=50, null=False, blank=False)
     uf = models.CharField(max_length=2, null=False, blank=False)
-    cep = models.CharField(max_length=7, null=False, blank=False)
     endereco_usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
 
     def __str__(self):
