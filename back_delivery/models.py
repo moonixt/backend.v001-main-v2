@@ -36,7 +36,7 @@ class UserManager(BaseUserManager):
 class Usuario(AbstractBaseUser, PermissionsMixin):
     nome = models.CharField(max_length=50, null=False,
                             blank=False, unique=True)
-    cpf = models.CharField(max_length=12, null=False, blank=False)
+    cpf = models.CharField(max_length=12, null=True, blank=True)
     celular = models.CharField(max_length=16, null=False, blank=False)
     email = models.CharField(max_length=50, null=False,
                              blank=False, unique=True)
