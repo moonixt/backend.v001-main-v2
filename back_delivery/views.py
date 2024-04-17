@@ -7,8 +7,8 @@ from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 
 from .auth import generate_otp, send_otp_phone
-from .models import Produto, Usuario, Restaurante
-from .serializers import ProdutoSerializer, UsuarioSerializer, RestauranteSerializer
+from .models import Produto, Usuario, Restaurante, Endereco
+from .serializers import ProdutoSerializer, UsuarioSerializer, RestauranteSerializer, EnderecoSerializer
 
 from rest_framework.decorators import api_view
 
@@ -36,6 +36,10 @@ class IsAuthenticatedOrPostOnly(BasePermission):
             return True
         return False
 
+
+class EnderecoViewSet(viewsets.ModelViewSet):
+    queryset = Endereco.objects.all()
+    serializer_class = EnderecoSerializer
 
 class UsuarioViewSet(viewsets.ModelViewSet):
     queryset = Usuario.objects.all()

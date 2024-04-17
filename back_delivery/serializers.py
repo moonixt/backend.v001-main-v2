@@ -2,6 +2,8 @@ from rest_framework import routers, serializers, viewsets
 from .models import Usuario
 from .models import Produto
 from .models import Restaurante
+from .models import Endereco
+
 
 
 class UsuarioSerializer(serializers.ModelSerializer):
@@ -19,6 +21,15 @@ class RestauranteSerializer(serializers.ModelSerializer):
         model = Restaurante
         fields = ('id', 'image', 'nome_restaurante', 'logradouro_restaurante', 'numero_restaurante', 'complemento_restaurante', 'ponto_ref_restaurante',
                   'bairro_restaurante', 'cidade_restaurante', 'uf_restaurante', 'cep_restaurante', 'descricao_restaurante', 'categoria_restaurante')
+        
+class EnderecoSerializer(serializers.ModelSerializer):
+
+
+
+    class Meta:
+        model = Endereco
+        fields = ('id', 'logradouro', 'numero', 'complemento', 'ponto_ref')
+
 
 
 class ProdutoSerializer(serializers.ModelSerializer):
@@ -29,3 +40,5 @@ class ProdutoSerializer(serializers.ModelSerializer):
         model = Produto
         fields = ('id', 'image', 'nome_produto', 'valor',
                   'qtd_estoque', 'descricao', 'restaurante', 'nome_restaurante',)
+        
+

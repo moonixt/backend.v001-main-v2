@@ -54,14 +54,14 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
 
 
 class Endereco(models.Model):
-    logradouro = models.CharField(max_length=50, null=False, blank=False)
+    logradouro = models.CharField(max_length=100, null=False, blank=False)
     numero = models.SmallIntegerField(blank=False)
     complemento = models.CharField(max_length=50, blank=True, null=True)
     ponto_ref = models.CharField(max_length=50, null=True, blank=True)
-    bairro = models.CharField(max_length=50, null=False, blank=False)
-    cidade = models.CharField(max_length=50, null=False, blank=False)
-    uf = models.CharField(max_length=2, null=False, blank=False)
-    endereco_usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
+    # bairro = models.CharField(max_length=50, null=False, blank=False)
+    # cidade = models.CharField(max_length=50, null=False, blank=False)
+    # uf = models.CharField(max_length=2, null=False, blank=False)
+    # endereco_usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.logradouro
