@@ -27,21 +27,17 @@ from back_delivery.views import LoginWithPhoneOTP, ValidateOTP
 from django.conf import settings
 from django.conf.urls.static import static
 
-
-
-
-
-def send_email(request):
-    msg = EmailMultiAlternatives(
+def send_email_confirmation(request):
+    msg_1 = EmailMultiAlternatives(
         'Confirmação de pedido!',
         'Este é um email de confirmação de pedido, agora falta pouco para você completar a compra!',
        'dls185568@gmail.com',
        #'luarabisqui@gmail.com'
-       ['derekoob@hotmail.com']
+       ['derekoob@hotmail.com',],#'san.25alm@gmail.com.br','luarabisqui@gmail.com']
     )
 
     try:
-        num_sent = msg.send()
+        num_sent = msg_1.send()
     except Exception as e:
         return HttpResponse(f'Erro ao enviar e-mail: {str(e)}', status=500)
 
@@ -49,6 +45,142 @@ def send_email(request):
         return HttpResponse('E-mail enviado com sucesso!')
     else:
         return HttpResponse('Falha ao enviar e-mail.', status=500)
+    
+def send_email_preparing(request):
+    msg_2 = EmailMultiAlternatives(
+        'Pedido sendo preparado!',
+        'Este é um email de confirmação, seu pedido está sendo preparado',
+       'dls185568@gmail.com',
+       #'luarabisqui@gmail.com'
+       ['derekoob@hotmail.com',],#'san.25alm@gmail.com.br','luarabisqui@gmail.com']
+    )
+
+    try:
+        num_sent = msg_2.send()
+    except Exception as e:
+        return HttpResponse(f'Erro ao enviar e-mail: {str(e)}', status=500)
+
+    if num_sent:
+        return HttpResponse('E-mail enviado com sucesso!')
+    else:
+        return HttpResponse('Falha ao enviar e-mail.', status=500)
+    
+def send_email_awaiting_payment(request):
+    msg_3 = EmailMultiAlternatives(
+        'Aguardando pagamento!',
+        'Este é um email de confirmação, estamos aguardando o seu pagamento.',
+       'dls185568@gmail.com',
+       #'luarabisqui@gmail.com'
+       ['derekoob@hotmail.com',],#'san.25alm@gmail.com.br','luarabisqui@gmail.com']
+    )
+
+    try:
+        num_sent = msg_3.send()
+    except Exception as e:
+        return HttpResponse(f'Erro ao enviar e-mail: {str(e)}', status=500)
+
+    if num_sent:
+        return HttpResponse('E-mail enviado com sucesso!')
+    else:
+        return HttpResponse('Falha ao enviar e-mail.', status=500)
+    
+def send_email_confirmed_payment(request):
+    msg_4 = EmailMultiAlternatives(
+        'Pagamento confirmado!',
+        'Este é um email de confirmação, seu pagamento foi confirmado, logo entrará em separação.',
+       'dls185568@gmail.com',
+       #'luarabisqui@gmail.com'
+       ['derekoob@hotmail.com',],#'san.25alm@gmail.com.br','luarabisqui@gmail.com']
+    )
+
+    try:
+        num_sent = msg_4.send()
+    except Exception as e:
+        return HttpResponse(f'Erro ao enviar e-mail: {str(e)}', status=500)
+
+    if num_sent:
+        return HttpResponse('E-mail enviado com sucesso!')
+    else:
+        return HttpResponse('Falha ao enviar e-mail.', status=500)
+    
+    
+def send_email_separation(request):
+    msg_5 = EmailMultiAlternatives(
+        'Pedido em separação!',
+        'Este é um email de confirmação, seu pedido está em separação!',
+       'dls185568@gmail.com',
+       #'luarabisqui@gmail.com'
+       ['derekoob@hotmail.com',],#'san.25alm@gmail.com.br','luarabisqui@gmail.com']
+    )
+
+    try:
+        num_sent = msg_5.send()
+    except Exception as e:
+        return HttpResponse(f'Erro ao enviar e-mail: {str(e)}', status=500)
+
+    if num_sent:
+        return HttpResponse('E-mail enviado com sucesso!')
+    else:
+        return HttpResponse('Falha ao enviar e-mail.', status=500)
+    
+def send_email_invoiced(request):
+    msg_6 = EmailMultiAlternatives(
+        'Pedido faturado!',
+        'Este é um email de confirmação, seu pedido foi faturado!',
+       'dls185568@gmail.com',
+       #'luarabisqui@gmail.com'
+       ['derekoob@hotmail.com',],#'san.25alm@gmail.com.br','luarabisqui@gmail.com']
+    )
+
+    try:
+        num_sent = msg_6.send()
+    except Exception as e:
+        return HttpResponse(f'Erro ao enviar e-mail: {str(e)}', status=500)
+
+    if num_sent:
+        return HttpResponse('E-mail enviado com sucesso!')
+    else:
+        return HttpResponse('Falha ao enviar e-mail.', status=500)
+    
+def send_email_transportation(request):
+    msg_7 = EmailMultiAlternatives(
+        'Saiu para entrega!',
+        'Este é um email de confirmação, seu pedido saiu para entrega!',
+       'dls185568@gmail.com',
+       #'luarabisqui@gmail.com'
+       ['derekoob@hotmail.com',],#'san.25alm@gmail.com.br','luarabisqui@gmail.com']
+    )
+
+    try:
+        num_sent = msg_7.send()
+    except Exception as e:
+        return HttpResponse(f'Erro ao enviar e-mail: {str(e)}', status=500)
+
+    if num_sent:
+        return HttpResponse('E-mail enviado com sucesso!')
+    else:
+        return HttpResponse('Falha ao enviar e-mail.', status=500)
+    
+def send_email_finish(request):
+    msg_8 = EmailMultiAlternatives(
+        'Pedido concluido!',
+        'Este é um email de confirmação, seu pedido foi concluído!',
+       'dls185568@gmail.com',
+       #'luarabisqui@gmail.com'
+       ['derekoob@hotmail.com',],#'san.25alm@gmail.com.br','luarabisqui@gmail.com']
+    )
+
+    try:
+        num_sent = msg_8.send()
+    except Exception as e:
+        return HttpResponse(f'Erro ao enviar e-mail: {str(e)}', status=500)
+
+    if num_sent:
+        return HttpResponse('E-mail enviado com sucesso!')
+    else:
+        return HttpResponse('Falha ao enviar e-mail.', status=500)
+
+
 
 
 router = routers.DefaultRouter()
@@ -63,7 +195,14 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls')),
     path('token/', MyTokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-    path('confirmar/', send_email),
+    path('confirmar/', send_email_confirmation),
+    path('pedido-finalizado/', send_email_preparing),
+    path('pedido-aguardando/', send_email_awaiting_payment),
+    path('pedido-pagamento-confirmado/', send_email_confirmed_payment),
+    path('pedido-separacao/', send_email_separation),
+    path('pedido-faturado/', send_email_invoiced),
+    path('pedido-entrega/', send_email_transportation),
+    path('pedido-concluido/', send_email_finish),
     path('otp/', LoginWithPhoneOTP.as_view(), name='login-with-otp'),
     path('validate-otp/', ValidateOTP.as_view(), name='validate-otp'),
     
