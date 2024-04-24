@@ -33,13 +33,12 @@ from django.conf.urls.static import static
 
 def send_email(request):
     msg = EmailMultiAlternatives(
-        'Email de teste',
-        'Este é um email de confirmação teste',
-       #email do projeto 'dls185568@gmail.com',
-       #email pessoal ['@hotmail.com']
+        'Confirmação de pedido!',
+        'Este é um email de confirmação de pedido, agora falta pouco para você completar a compra!',
+       'dls185568@gmail.com',
+       #'luarabisqui@gmail.com'
+       ['derekoob@hotmail.com']
     )
-
-    msg.send()
 
     try:
         num_sent = msg.send()
@@ -64,7 +63,7 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls')),
     path('token/', MyTokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-    path('testmail/', send_email),
+    path('confirmar/', send_email),
     path('otp/', LoginWithPhoneOTP.as_view(), name='login-with-otp'),
     path('validate-otp/', ValidateOTP.as_view(), name='validate-otp'),
     
