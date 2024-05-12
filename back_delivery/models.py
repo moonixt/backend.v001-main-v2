@@ -87,8 +87,7 @@ class Categoria(models.Model):
 
 
 class Restaurante(models.Model):
-    image = models.ImageField(
-        upload_to='upload/images', null=False, blank=True)
+    image = models.ImageField(upload_to='upload/images',null=False, blank=True)
     nome_restaurante = models.CharField(max_length=50, null=False, blank=False)
     logradouro_restaurante = models.CharField(
         max_length=50, null=False, blank=False)
@@ -113,7 +112,7 @@ class Restaurante(models.Model):
 
 class Produto(models.Model):
     image = models.ImageField(
-    upload_to='upload/images', null=False, blank=True)
+    upload_to='upload/images', null=True, blank=True)
     nome_produto = models.CharField(max_length=50, null=False, blank=True)
     valor = models.DecimalField(max_digits=6, decimal_places=2, blank=True)
     qtd_estoque = models.IntegerField(blank=True)
