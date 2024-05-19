@@ -7,8 +7,8 @@ from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 
 from .auth import generate_otp, send_otp_phone
-from .models import Produto, Usuario, Restaurante, Endereco
-from .serializers import ProdutoSerializer, UsuarioSerializer, RestauranteSerializer, EnderecoSerializer
+from .models import Produto, Usuario, Restaurante, Endereco, Pedido
+from .serializers import ProdutoSerializer, UsuarioSerializer, RestauranteSerializer, EnderecoSerializer, PedidoSerializer
 
 from rest_framework.decorators import api_view
 
@@ -53,6 +53,10 @@ class ProdutoViewSet(viewsets.ModelViewSet):
 class RestauranteViewSet(viewsets.ModelViewSet):
     queryset = Restaurante.objects.all()
     serializer_class = RestauranteSerializer
+    
+class PedidoViewSet(viewsets.ModelViewSet):
+    queryset = Pedido.objects.all()
+    serializer_class = PedidoSerializer
 
 
 class LoginWithPhoneOTP(APIView):

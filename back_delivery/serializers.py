@@ -3,6 +3,7 @@ from .models import Usuario
 from .models import Produto
 from .models import Restaurante
 from .models import Endereco
+from .models import Pedido
 
 
 
@@ -42,3 +43,11 @@ class ProdutoSerializer(serializers.ModelSerializer):
                   'qtd_estoque', 'descricao', 'restaurante', 'nome_restaurante',)
         
 
+class PedidoSerializer(serializers.ModelSerializer):
+    
+    
+    class Meta:
+        model = Pedido
+        fields = ('id', 'produtos', 'data_compra', 'valor_total', 'qtd_total','restaurante',)
+
+    

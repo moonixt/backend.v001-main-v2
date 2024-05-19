@@ -15,7 +15,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from back_delivery.models import Endereco
-from back_delivery.views import MyTokenObtainPairView, UsuarioViewSet, ProdutoViewSet, RestauranteViewSet, EnderecoViewSet, get_produtos_restaurantes
+from back_delivery.views import MyTokenObtainPairView, UsuarioViewSet, ProdutoViewSet, RestauranteViewSet, EnderecoViewSet, PedidoViewSet , get_produtos_restaurantes
 from django.contrib import admin
 from django.core.mail import EmailMultiAlternatives
 from django.http import HttpResponse
@@ -26,6 +26,10 @@ from rest_framework_simplejwt.views import (TokenObtainPairView,
 from back_delivery.views import LoginWithPhoneOTP, ValidateOTP
 from django.conf import settings
 from django.conf.urls.static import static
+from email.mime.multipart import MIMEMultipart
+from email.mime.application import MIMEApplication
+
+from email.mime.text import MIMEText
 
 def send_email_confirmation(request):
     msg_1 = EmailMultiAlternatives(
@@ -131,6 +135,12 @@ def send_email_invoiced(request):
        #'luarabisqui@gmail.com'
        ['derekoob@hotmail.com',],#'san.25alm@gmail.com.br','luarabisqui@gmail.com']
     )
+    
+    with open('backend/document.pdf', 'rb') as f:
+        file_data = f.read()
+        file_name = f.name
+
+    msg_6.attach(file_name, file_data, 'application/pdf')
 
     try:
         num_sent = msg_6.send()
@@ -141,6 +151,8 @@ def send_email_invoiced(request):
         return HttpResponse('E-mail enviado com sucesso!')
     else:
         return HttpResponse('Falha ao enviar e-mail.', status=500)
+    
+
     
 def send_email_transportation(request):
     msg_7 = EmailMultiAlternatives(
@@ -188,6 +200,7 @@ router.register(r'usuarios', UsuarioViewSet)
 router.register(r'produtos',ProdutoViewSet)
 router.register(r'restaurantes',RestauranteViewSet)
 router.register(r'enderecos',EnderecoViewSet)
+router.register(r'Pedidos',PedidoViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),

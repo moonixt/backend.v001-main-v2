@@ -67,16 +67,7 @@ class Endereco(models.Model):
         return self.logradouro
 
 
-class Pedido(models.Model):
-    num_nota_fiscal = models.IntegerField()
-    serie_nota_fiscal = models.IntegerField()
-    data_compra = models.DateTimeField(auto_now=False, auto_now_add=False)
-    valor_total = models.DecimalField(max_digits=6, decimal_places=2)
-    qtd_total = models.IntegerField()
-    pedido_usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
 
-    def __str__(self):
-        return str(self.id)
 
 
 class Categoria(models.Model):
@@ -121,6 +112,20 @@ class Produto(models.Model):
 
     def __str__(self):
         return self.nome_produto
+
+
+
+class Pedido(models.Model):
+    # num_nota_fiscal = models.IntegerField()
+    # serie_nota_fiscal = models.IntegerField()
+    produtos = models.ManyToManyField(Produto)
+    data_compra = models.DateTimeField(auto_now=True, auto_now_add=False)
+    valor_total = models.DecimalField(max_digits=6, decimal_places=2)
+    qtd_total = models.IntegerField()
+    restaurante =  models.ForeignKey(Restaurante, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"Pedido {self.id}"  # Substitua pelo atributo correto (por exemplo, número do pedido)
 
 
 class Item_pedido(models.Model):
